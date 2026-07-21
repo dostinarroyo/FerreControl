@@ -3,10 +3,10 @@ spring:
     name: ferrecontrol
 
   datasource:
-    url: jdbc:mysql://localhost:3306/ferrecontrol?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}?useSSL=false&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: dilan
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
 
   jpa:
     hibernate:
