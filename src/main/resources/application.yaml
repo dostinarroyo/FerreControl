@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: ferrecontrol
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/ferrecontrol?useSSL=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: dilan
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

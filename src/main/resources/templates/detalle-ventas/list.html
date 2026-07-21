@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}">Detalle de Ventas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">Ferrecontrol</a>
+        <div class="d-flex">
+            <a class="btn btn-outline-light btn-sm" th:href="@{/logout}">Cerrar sesión</a>
+        </div>
+    </div>
+</nav>
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 th:text="${titulo}">Detalle de Ventas</h1>
+        <a class="btn btn-primary" th:href="@{/detalle-ventas/nuevo}">Nuevo Detalle</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Venta</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Subtotal</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="d : ${detalleVentas}">
+            <td th:text="${d.id}">1</td>
+            <td th:text="${d.venta != null ? d.venta.id : '-'}">1</td>
+            <td th:text="${d.producto != null ? d.producto.nombre : '-'}">Producto</td>
+            <td th:text="${d.cantidad}">1</td>
+            <td th:text="${d.precioUnitario}">0.00</td>
+            <td th:text="${d.subtotal}">0.00</td>
+            <td>
+                <a class="btn btn-sm btn-outline-secondary" th:href="@{/detalle-ventas/editar/{id}(id=${d.id})}">Editar</a>
+                <a class="btn btn-sm btn-outline-danger" th:href="@{/detalle-ventas/eliminar/{id}(id=${d.id})}" onclick="return confirm('Eliminar detalle?');">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-secondary" th:href="@{/}">Volver</a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
