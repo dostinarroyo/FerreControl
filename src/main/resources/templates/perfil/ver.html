@@ -20,7 +20,7 @@
 <div class="container py-5">
     <div class="card p-4">
         <div class="d-flex gap-4 align-items-center">
-            <img th:src="${usuario.foto != null and usuario.foto != '' ? usuario.foto : '/img/ferreteria-icon.svg'}" class="profile-photo" alt="Foto" />
+            <img th:src="${usuario.foto != null and usuario.foto != ''} ? '/uploads/perfiles/' + usuario.foto : '/img/perfiles/perfil-default.svg'" class="profile-photo" alt="Foto" />
             <div>
                 <h3 th:text="${usuario.nombre}">Nombre</h3>
                 <p><strong>Correo:</strong> <span th:text="${usuario.correo}">correo</span></p>

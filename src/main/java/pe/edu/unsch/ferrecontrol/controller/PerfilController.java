@@ -68,7 +68,7 @@ public class PerfilController {
         Usuario u = obtenerUsuarioAutenticado();
         if (u == null) return "redirect:/login";
         if (foto != null && !foto.isEmpty()) {
-            Path uploadsPath = Paths.get("uploads/usuarios");
+            Path uploadsPath = Paths.get("uploads/perfiles");
             if (!Files.exists(uploadsPath)) Files.createDirectories(uploadsPath);
             String ext = "";
             String original = foto.getOriginalFilename();
@@ -77,7 +77,7 @@ public class PerfilController {
             String filename = UUID.randomUUID().toString() + ext;
             Path filePath = uploadsPath.resolve(filename);
             Files.copy(foto.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-            u.setFoto("/uploads/usuarios/" + filename);
+            u.setFoto(filename);
             usuarioService.guardar(u);
         }
         return "redirect:/mi-perfil";
