@@ -33,7 +33,10 @@ public class UsuarioController {
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute Usuario usuario) {
         usuarioService.guardar(usuario);
-        return "redirect:/usuarios";
+        var auth = org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        boolean isAdmin = auth != null && auth.isAuthenticated() && auth.getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
+        return isAdmin ? "redirect:/usuarios" : "redirect:/login";
     }
 
     @GetMapping("/editar/{id}")

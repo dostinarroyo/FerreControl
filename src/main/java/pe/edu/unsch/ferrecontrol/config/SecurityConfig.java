@@ -23,7 +23,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/login", "/register", "/usuarios/nuevo", "/usuarios/guardar", "/css/**", "/js/**", "/img/**", "/webjars/**").permitAll()
                 .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/usuarios/**").hasRole("ADMIN")
+                .requestMatchers("/usuarios", "/usuarios/editar/**", "/usuarios/eliminar/**").hasRole("ADMIN")
                 .requestMatchers("/mi-perfil/**").authenticated()
                 .anyRequest().authenticated()
             )
