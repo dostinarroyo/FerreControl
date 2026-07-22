@@ -12,11 +12,11 @@ import org.springframework.web.multipart.MultipartFile;
 import pe.edu.unsch.ferrecontrol.model.Usuario;
 import pe.edu.unsch.ferrecontrol.service.UsuarioService;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
 @Controller
@@ -68,8 +68,7 @@ public class PerfilController {
         Usuario u = obtenerUsuarioAutenticado();
         if (u == null) return "redirect:/login";
         if (foto != null && !foto.isEmpty()) {
-            String uploadsDir = "src/main/resources/static/img/usuarios";
-            Path uploadsPath = Paths.get(uploadsDir);
+            Path uploadsPath = Paths.get("uploads/usuarios");
             if (!Files.exists(uploadsPath)) Files.createDirectories(uploadsPath);
             String ext = "";
             String original = foto.getOriginalFilename();
@@ -77,8 +76,8 @@ public class PerfilController {
             if (i > 0) ext = original.substring(i);
             String filename = UUID.randomUUID().toString() + ext;
             Path filePath = uploadsPath.resolve(filename);
-            Files.copy(foto.getInputStream(), filePath);
-            u.setFoto("/img/usuarios/" + filename);
+            Files.copy(foto.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+            u.setFoto("/uploads/usuarios/" + filename);
             usuarioService.guardar(u);
         }
         return "redirect:/mi-perfil";
