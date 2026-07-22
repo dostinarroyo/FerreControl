@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navMenu">
             <div class="ms-auto">
-                <a class="btn btn-outline-light btn-sm" th:href="@{/usuarios/nuevo}">Nuevo usuario</a>
+                <a class="btn btn-outline-light btn-sm" th:href="@{/mi-perfil}" sec:authorize="isAuthenticated()">Mi Perfil</a>
+                <a class="btn btn-outline-light btn-sm" th:href="@{/usuarios/nuevo}" sec:authorize="hasRole('ADMIN')">Nuevo usuario</a>
             </div>
         </div>
     </div>

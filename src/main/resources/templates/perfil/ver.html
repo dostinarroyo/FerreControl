@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo}">Mi Perfil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style> .profile-photo { width:120px; height:120px; object-fit:cover; border-radius:999px; } </style>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">Ferrecontrol</a>
+        <div class="d-flex">
+            <a class="btn btn-outline-light me-2" th:href="@{/mi-perfil/editar}">Editar</a>
+            <a class="btn btn-outline-light" th:href="@{/logout}">Cerrar sesión</a>
+        </div>
+    </div>
+</nav>
+<div class="container py-5">
+    <div class="card p-4">
+        <div class="d-flex gap-4 align-items-center">
+            <img th:src="${usuario.foto != null} ? ${usuario.foto} : '/img/default-user.png'" class="profile-photo" alt="Foto" />
+            <div>
+                <h3 th:text="${usuario.nombre}">Nombre</h3>
+                <p><strong>Correo:</strong> <span th:text="${usuario.correo}">correo</span></p>
+                <p><strong>Rol:</strong> <span th:text="${usuario.rol}">ROL</span></p>
+                <form th:action="@{/mi-perfil/foto}" method="post" enctype="multipart/form-data" class="mt-3">
+                    <input type="file" name="foto" />
+                    <button class="btn btn-primary btn-sm" type="submit">Cambiar foto</button>
+                </form>
+                <form th:action="@{/mi-perfil/password}" method="post" class="mt-3">
+                    <div class="mb-2">
+                        <input type="password" name="password" class="form-control" placeholder="Nueva contraseña" />
+                    </div>
+                    <button class="btn btn-warning btn-sm" type="submit">Cambiar contraseña</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

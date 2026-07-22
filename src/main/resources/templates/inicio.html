@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +50,8 @@
                     <li class="nav-item"><a class="nav-link active" th:href="@{/}">Inicio</a></li>
                 </ul>
                 <div class="d-flex align-items-center gap-2">
-                    <a class="btn btn-outline-light btn-sm" th:href="@{/usuarios}">Usuarios</a>
+                    <a class="btn btn-outline-light btn-sm" th:href="@{/mi-perfil}" sec:authorize="isAuthenticated()">Mi Perfil</a>
+                    <a class="btn btn-outline-light btn-sm" th:href="@{/usuarios}" sec:authorize="hasRole('ADMIN')">Usuarios</a>
                     <a class="btn btn-outline-light btn-sm" th:href="@{/logout}">Cerrar sesión</a>
                 </div>
             </div>
@@ -67,7 +68,7 @@
                         <a class="list-group-item list-group-item-action" th:href="@{/categorias}">Categorías</a>
                         <a class="list-group-item list-group-item-action" th:href="@{/proveedores}">Proveedores</a>
                         <a class="list-group-item list-group-item-action" th:href="@{/ventas}">Ventas</a>
-                        <a class="list-group-item list-group-item-action" th:href="@{/usuarios}">Usuarios</a>
+                        <a class="list-group-item list-group-item-action" th:href="@{/usuarios}" sec:authorize="hasRole('ADMIN')">Usuarios</a>
                     </div>
                 </div>
             </div>
